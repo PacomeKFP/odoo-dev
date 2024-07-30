@@ -5,6 +5,7 @@
         <record id="estate_property_action" model="ir.actions.act_window">
             <field name="name">Properties</field>
             <field name="res_model">estate.property</field>
+            <field name="context">{'active_test': False}</field>
             <field name="view_mode">tree,form</field>
         </record>
 
@@ -13,16 +14,19 @@
             <field name="name">estate.property.tree</field>
             <field name="model">estate.property</field>
             <field name="arch" type="xml">
-                <tree editable="bottom">
+                <tree>
                     <field name="name"/>
                     <field name="postcode"/>
                     <field name="bedrooms"/>
                     <field name="living_area"/>
+                    <field name="active"/>
                     <field name="state"/>
                     <field name="expected_price"/>
                     <field name="selling_price"/>
                     <field name="date_availability"/>
+
                     <field name="property_type_id"/>
+                    <field name="tags_id" widget="many2many_tags"/>
                     <field name="salesperson_id"/>
                     <field name="buyer_id"/>
                 </tree>
@@ -39,6 +43,8 @@
                         <h1>
                             <field name="name" placeholder="My New House"/>
                         </h1>
+                        <field name="tags_id" widget="many2many_tags"
+                               placeholder="Tags"/>
                         <group>
                             <group>
                                 <field name="postcode" placeholder="1000"/>
@@ -57,20 +63,20 @@
                                         <field name="bedrooms"/>
                                         <field name="living_area"/>
                                         <field name="facades"/>
-                                        <field name="garage"/>
+                                        <field name="active"/>
                                     </group>
                                     <group>
+                                        <field name="garage"/>
                                         <field name="garden"/>
                                         <field name="garden_area"/>
                                         <field name="garden_orientation" placeholder="Click to select orientation"/>
                                     </group>
                                 </group>
                             </page>
-                            <page string="Details">
+                            <page string="Others info">
                                 <group>
-
                                     <field name="property_type_id" placeholder="Property Type"/>
-                                    <field name="salesperson_id" placeholde="Salesperson"/>
+                                    <field name="salesperson_id" placeholder="Salesperson"/>
                                     <field name="buyer_id" string="Buyer"/>
                                 </group>
                             </page>
@@ -79,6 +85,7 @@
                 </form>
             </field>
         </record>
+
 
         <!-- Search View for Estate Property List -->
         <record id="view_estate_property_search" model="ir.ui.view">

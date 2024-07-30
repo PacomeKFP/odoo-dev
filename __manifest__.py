@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'Real Estate',
+    'name': 'Real Estate Old',
     'version': '1.0',
 
     'summary': "The real estate module as presented in the documentation",

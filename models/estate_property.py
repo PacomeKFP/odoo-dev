@@ -11,7 +11,7 @@ class EstateProperty(models.Model):
     postcode = fields.Char(string='Postcode')
     date_availability = fields.Date(string='Date Availability', copy=False,
                                     default=lambda self: fields.Date.today() + timedelta(days=90))
-    active = fields.Boolean(string='Active', default=False)
+    active = fields.Boolean(string='Active')
     state = fields.Selection(
         string="State",
         selection=[
@@ -30,6 +30,7 @@ class EstateProperty(models.Model):
     living_area = fields.Integer(string='Living Area (sqm)')
     facades = fields.Integer(string='Facades')
     garage = fields.Boolean(string='Garage')
+
     garden = fields.Boolean(string='Garden')
     garden_area = fields.Integer(string='Garden Area (sqm)')
     garden_orientation = fields.Selection([
@@ -39,9 +40,16 @@ class EstateProperty(models.Model):
         ('west', 'West')
     ], string='Garden Orientation')
 
+    # --------- Relationships ---------#
+
+    # Many to One
+
     property_type_id = fields.Many2one('estate.property.type', string='Property Type')
     salesperson_id = fields.Many2one('res.users', string='Salesperson', default=lambda self: self.env.user)
     buyer_id = fields.Many2one('res.partner', string='Buyer', copy=False)
+
+    # Many to Many
+    tags_id = fields.Many2many('estate.property.tag', string='Tags')
 
     _sql_constraints = [
         ('name_unique', 'unique(name)', 'The property name must be unique.'),
