@@ -1,5 +1,5 @@
+from odoo import models, fields, api
 from datetime import timedelta
-from odoo import models, fields
 
 
 class EstateProperty(models.Model):
@@ -27,12 +27,12 @@ class EstateProperty(models.Model):
     expected_price = fields.Float(string='Expected Price')
     selling_price = fields.Float(string='Selling Price', copy=False, readonly=True)
     bedrooms = fields.Integer(string='Bedrooms', default=2)
-    living_area = fields.Integer(string='Living Area (sqm)')
+    living_area = fields.Integer(string='Living Area (sqm)', default=0)
     facades = fields.Integer(string='Facades')
     garage = fields.Boolean(string='Garage')
 
     garden = fields.Boolean(string='Garden')
-    garden_area = fields.Integer(string='Garden Area (sqm)')
+    garden_area = fields.Integer(string='Garden Area (sqm)', default=0)
     garden_orientation = fields.Selection([
         ('north', 'North'),
         ('south', 'South'),
@@ -51,20 +51,43 @@ class EstateProperty(models.Model):
     # Many to Many
     tags_id = fields.Many2many('estate.property.tag', string='Tags')
 
-    _sql_constraints = [
-        ('name_unique', 'unique(name)', 'The property name must be unique.'),
+    # one to many
+    offer_ids = fields.One2many("estate.property.offer", "property_id", string="Offers")
 
-    ]
+    # --------- Computed fields ---------#
 
-    # Contraintes
-    """
-    - On ne peut pas preciser d'orientation pour le jardin si  on a pas de jardin
-    - Pas de taille de jardin s'il n'y a pas de jardin 
-    """
+    # Total area
+    total_area = fields.Float(string="Total Area", compute='_compute_total_area', store=False, readonly=True)
 
-    """@api.constrains('expected_price', 'selling_price')
-    def _check_price(self):
+    @api.depends("living_area", "garden_area")
+    def _compute_total_area(self):
         for record in self:
-            if record.selling_price and record.selling_price > record.expected_price:
-                raise ValidationError('The selling price cannot be higher than the expected price.')
-"""
+            record.total_area = record.living_area + record.garden_area
+
+    # best price
+    best_price = fields.Float(string='Best Offer', compute='_compute_best_price', store=False, readonly=True)
+
+    @api.depends('offer_ids.price')
+    def _compute_best_price(self):
+        for _property in self:
+            if _property.offer_ids:
+                _property.best_price = max(_property.offer_ids.mapped('price'))
+            else:
+                _property.best_price = 0.0
+
+    # --------- On changes handlers ---------#
+    @api.onchange("garden")
+    def _onchange_garden(self):
+        if self.garden:
+            self.garden_orientation = 'north'
+            self.garden_area = 10
+        else:
+            self.garden_orientation = ""
+            self.garden_area = 0.0
+
+    # --------- Buttons ---------#
+    def cancel(self): 
+        return True
+
+    def sold(self):
+        return True
