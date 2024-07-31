@@ -1,5 +1,6 @@
 from datetime import timedelta
 from odoo import models, fields, api
+from odoo.exceptions import UserError
 
 
 class EstatePropertyOffer(models.Model):
@@ -27,3 +28,40 @@ class EstatePropertyOffer(models.Model):
         for record in self:
             create_date = record.create_date if record.create_date else fields.Date.today()
             record.validity = (record.date_deadline - create_date).days
+
+    # --------- Action Buttons ---------#
+
+    def action_accept(self):
+        for _offer in self:
+
+            if _offer.property_id.state == "offer_accepted":
+                raise UserError("There is already an accepted offer")
+
+            if _offer.property_id.state == "cancelled":
+                raise UserError("The Property sale have been canceled")
+
+            # Chercher les autres offres sur la meme propriété et modifier
+            property_offers = _offer.property_id.mapped("offer_ids")
+            for offer in property_offers:
+                offer.status = 'refused'
+
+            _offer.status = 'accepted'
+            _offer.property_id.buyer_id = _offer.partner_id.id
+            _offer.property_id.selling_price = _offer.price
+
+        return True
+
+    def action_refuse(self):
+        for _offer in self:
+            _offer.status = 'refused'
+            _offer.property_id.buyer_id = ""
+            _offer.property_id.selling_price = 0
+
+        return True
+
+    # --------- Constraints ---------#
+    _sql_constraints = [
+        ("price", "check(price>0)", "Offer Price must me positive"),
+        ("validity", "check(validity>0)", "Validity must me positive"),
+    ]
+

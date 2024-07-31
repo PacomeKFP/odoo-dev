@@ -1,5 +1,7 @@
-from odoo import models, fields, api
 from datetime import timedelta
+from odoo import models, fields, api
+from odoo.exceptions import UserError
+from odoo.tools.float_utils import float_compare, float_is_zero
 
 
 class EstateProperty(models.Model):
@@ -85,9 +87,29 @@ class EstateProperty(models.Model):
             self.garden_orientation = ""
             self.garden_area = 0.0
 
-    # --------- Buttons ---------#
-    def cancel(self): 
+    # --------- Action Buttons ---------#
+
+    def action_cancel(self):
+        for _property in self:
+            _property.state = "canceled"
         return True
 
-    def sold(self):
+    def action_sold(self):
+        for _property in self:
+            if _property.state == "canceled":
+                raise UserError("Cancelled Properties cannot be sold")
+            _property.state = "sold"
         return True
+
+    # --------- Constraints ---------#
+    _sql_constraints = [
+        ("name", "unique(name)", "Property name must be unique"),
+        ("expected_price", "check(expected_price>0)", "Expected Price must me positive"),
+        ("selling_price", "check(selling_price>0)", "Selling Price must me positive"),
+    ]
+
+    @api.constrains("selling_price")
+    def _check_selling_price(self):
+        for _property in self:
+            if float_compare(_property.expected_price * 0.9, _property.selling_price, 3) == 1:
+                raise UserError("Selling price must be at least 90% of the expected price")
