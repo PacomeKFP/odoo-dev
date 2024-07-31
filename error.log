@@ -1,157 +1,150 @@
-2024-07-30 12:26:12 2024-07-30 11:26:12,309 1 INFO ? odoo: Odoo version 17.0-20240711 
-2024-07-30 12:26:12 2024-07-30 11:26:12,312 1 INFO ? odoo: Using configuration file at /etc/odoo/odoo.conf 
-2024-07-30 12:26:12 2024-07-30 11:26:12,313 1 INFO ? odoo: addons paths: ['/usr/lib/python3/dist-packages/odoo/addons', '/var/lib/odoo/.local/share/Odoo/addons/17.0', '/mnt/extra-addons/custom-addons'] 
-2024-07-30 12:26:12 2024-07-30 11:26:12,315 1 INFO ? odoo: database: odoo@pgdb:5432 
-2024-07-30 12:26:12 2024-07-30 11:26:12,608 1 INFO ? odoo.addons.base.models.ir_actions_report: Will use the Wkhtmltopdf binary at /usr/local/bin/wkhtmltopdf 
-2024-07-30 12:26:13 2024-07-30 11:26:13,029 1 INFO ? odoo.service.server: HTTP service (werkzeug) running on 13e6b3ca0ecb:8069 
-2024-07-30 12:26:21 2024-07-30 11:26:21,672 1 INFO odoo odoo.modules.loading: loading 1 modules... 
-2024-07-30 12:26:21 2024-07-30 11:26:21,699 1 INFO odoo odoo.modules.loading: 1 modules loaded in 0.03s, 0 queries (+0 extra) 
-2024-07-30 12:26:21 2024-07-30 11:26:21,755 1 INFO odoo odoo.modules.loading: loading 12 modules... 
-2024-07-30 12:26:22 2024-07-30 11:26:22,605 1 INFO odoo odoo.modules.loading: 12 modules loaded in 0.85s, 0 queries (+0 extra) 
-2024-07-30 12:26:22 2024-07-30 11:26:22,912 1 WARNING odoo odoo.fields: Field estate.property.offer_ids with unknown comodel_name 'estate.property.offer' 
-2024-07-30 12:26:22 2024-07-30 11:26:22,944 1 WARNING odoo odoo.modules.loading: Transient module states were reset 
-2024-07-30 12:26:23 2024-07-30 11:26:22,945 1 ERROR odoo odoo.modules.registry: Failed to load registry 
-2024-07-30 12:26:23 Traceback (most recent call last):
-2024-07-30 12:26:23   File "/usr/lib/python3/dist-packages/odoo/modules/registry.py", line 87, in __new__
-2024-07-30 12:26:23     return cls.registries[db_name]
-2024-07-30 12:26:23   File "<decorator-gen-5>", line 2, in __getitem__
-2024-07-30 12:26:23   File "/usr/lib/python3/dist-packages/odoo/tools/func.py", line 87, in locked
-2024-07-30 12:26:23     return func(inst, *args, **kwargs)
-2024-07-30 12:26:23   File "/usr/lib/python3/dist-packages/odoo/tools/lru.py", line 34, in __getitem__
-2024-07-30 12:26:23     a = self.d[obj]
-2024-07-30 12:26:23 KeyError: 'odoo'
-2024-07-30 12:26:23 
-2024-07-30 12:26:23 During handling of the above exception, another exception occurred:
-2024-07-30 12:26:23 
-2024-07-30 12:26:23 Traceback (most recent call last):
-2024-07-30 12:26:23   File "/usr/lib/python3/dist-packages/odoo/modules/registry.py", line 113, in new
-2024-07-30 12:26:23     odoo.modules.load_modules(registry, force_demo, status, update_module)
-2024-07-30 12:26:23   File "/usr/lib/python3/dist-packages/odoo/modules/loading.py", line 502, in load_modules
-2024-07-30 12:26:23     registry.setup_models(cr)
-2024-07-30 12:26:23   File "<decorator-gen-19>", line 2, in setup_models
-2024-07-30 12:26:23   File "/usr/lib/python3/dist-packages/odoo/tools/func.py", line 87, in locked
-2024-07-30 12:26:23     return func(inst, *args, **kwargs)
-2024-07-30 12:26:23   File "/usr/lib/python3/dist-packages/odoo/modules/registry.py", line 323, in setup_models
-2024-07-30 12:26:23     model._setup_fields()
-2024-07-30 12:26:23   File "/usr/lib/python3/dist-packages/odoo/models.py", line 3378, in _setup_fields
-2024-07-30 12:26:23     field.setup(self)
-2024-07-30 12:26:23   File "/usr/lib/python3/dist-packages/odoo/fields.py", line 533, in setup
-2024-07-30 12:26:23     self.setup_nonrelated(model)
-2024-07-30 12:26:23   File "/usr/lib/python3/dist-packages/odoo/fields.py", line 4413, in setup_nonrelated
-2024-07-30 12:26:23     invf = comodel._fields[self.inverse_name]
-2024-07-30 12:26:23 KeyError: 'property_id'
-2024-07-30 12:26:23 2024-07-30 11:26:23,001 1 ERROR odoo odoo.http: Exception during request handling. 
-2024-07-30 12:26:23 Traceback (most recent call last):
-2024-07-30 12:26:23   File "/usr/lib/python3/dist-packages/odoo/modules/registry.py", line 87, in __new__
-2024-07-30 12:26:23     return cls.registries[db_name]
-2024-07-30 12:26:23   File "<decorator-gen-5>", line 2, in __getitem__
-2024-07-30 12:26:23   File "/usr/lib/python3/dist-packages/odoo/tools/func.py", line 87, in locked
-2024-07-30 12:26:23     return func(inst, *args, **kwargs)
-2024-07-30 12:26:23   File "/usr/lib/python3/dist-packages/odoo/tools/lru.py", line 34, in __getitem__
-2024-07-30 12:26:23     a = self.d[obj]
-2024-07-30 12:26:23 KeyError: 'odoo'
-2024-07-30 12:26:23 
-2024-07-30 12:26:23 During handling of the above exception, another exception occurred:
-2024-07-30 12:26:23 
-2024-07-30 12:26:23 Traceback (most recent call last):
-2024-07-30 12:26:23   File "/usr/lib/python3/dist-packages/odoo/http.py", line 2189, in __call__
-2024-07-30 12:26:23     response = request._serve_db()
-2024-07-30 12:26:23   File "/usr/lib/python3/dist-packages/odoo/http.py", line 1743, in _serve_db
-2024-07-30 12:26:23     self.registry = Registry(self.db).check_signaling()
-2024-07-30 12:26:23   File "/usr/lib/python3/dist-packages/odoo/modules/registry.py", line 89, in __new__
-2024-07-30 12:26:23     return cls.new(db_name)
-2024-07-30 12:26:23   File "<decorator-gen-16>", line 2, in new
-2024-07-30 12:26:23   File "/usr/lib/python3/dist-packages/odoo/tools/func.py", line 87, in locked
-2024-07-30 12:26:23     return func(inst, *args, **kwargs)
-2024-07-30 12:26:23   File "/usr/lib/python3/dist-packages/odoo/modules/registry.py", line 113, in new
-2024-07-30 12:26:23     odoo.modules.load_modules(registry, force_demo, status, update_module)
-2024-07-30 12:26:23   File "/usr/lib/python3/dist-packages/odoo/modules/loading.py", line 502, in load_modules
-2024-07-30 12:26:23     registry.setup_models(cr)
-2024-07-30 12:26:23   File "<decorator-gen-19>", line 2, in setup_models
-2024-07-30 12:26:23   File "/usr/lib/python3/dist-packages/odoo/tools/func.py", line 87, in locked
-2024-07-30 12:26:23     return func(inst, *args, **kwargs)
-2024-07-30 12:26:23   File "/usr/lib/python3/dist-packages/odoo/modules/registry.py", line 323, in setup_models
-2024-07-30 12:26:23     model._setup_fields()
-2024-07-30 12:26:23   File "/usr/lib/python3/dist-packages/odoo/models.py", line 3378, in _setup_fields
-2024-07-30 12:26:23     field.setup(self)
-2024-07-30 12:26:23   File "/usr/lib/python3/dist-packages/odoo/fields.py", line 533, in setup
-2024-07-30 12:26:23     self.setup_nonrelated(model)
-2024-07-30 12:26:23   File "/usr/lib/python3/dist-packages/odoo/fields.py", line 4413, in setup_nonrelated
-2024-07-30 12:26:23     invf = comodel._fields[self.inverse_name]
-2024-07-30 12:26:23 KeyError: 'property_id'
-2024-07-30 12:26:23 2024-07-30 11:26:23,012 1 INFO odoo werkzeug: 172.18.0.1 - - [30/Jul/2024 11:26:23] "GET /websocket HTTP/1.1" 500 - 14 1.088 1.112
-2024-07-30 12:26:27 2024-07-30 11:26:27,234 1 INFO odoo odoo.modules.loading: loading 1 modules... 
-2024-07-30 12:26:27 2024-07-30 11:26:27,265 1 INFO odoo odoo.modules.loading: 1 modules loaded in 0.03s, 0 queries (+0 extra) 
-2024-07-30 12:26:27 2024-07-30 11:26:27,280 1 INFO odoo odoo.modules.loading: loading 12 modules... 
-2024-07-30 12:26:27 2024-07-30 11:26:27,319 1 INFO odoo odoo.modules.loading: 12 modules loaded in 0.04s, 0 queries (+0 extra) 
-2024-07-30 12:26:27 2024-07-30 11:26:27,368 1 WARNING odoo odoo.modules.loading: Transient module states were reset 
-2024-07-30 12:26:27 2024-07-30 11:26:27,369 1 ERROR odoo odoo.modules.registry: Failed to load registry 
-2024-07-30 12:26:27 Traceback (most recent call last):
-2024-07-30 12:26:27   File "/usr/lib/python3/dist-packages/odoo/modules/registry.py", line 87, in __new__
-2024-07-30 12:26:27     return cls.registries[db_name]
-2024-07-30 12:26:27   File "<decorator-gen-5>", line 2, in __getitem__
-2024-07-30 12:26:27   File "/usr/lib/python3/dist-packages/odoo/tools/func.py", line 87, in locked
-2024-07-30 12:26:27     return func(inst, *args, **kwargs)
-2024-07-30 12:26:27   File "/usr/lib/python3/dist-packages/odoo/tools/lru.py", line 34, in __getitem__
-2024-07-30 12:26:27     a = self.d[obj]
-2024-07-30 12:26:27 KeyError: 'odoo'
-2024-07-30 12:26:27 
-2024-07-30 12:26:27 During handling of the above exception, another exception occurred:
-2024-07-30 12:26:27 
-2024-07-30 12:26:27 Traceback (most recent call last):
-2024-07-30 12:26:27   File "/usr/lib/python3/dist-packages/odoo/modules/registry.py", line 113, in new
-2024-07-30 12:26:27     odoo.modules.load_modules(registry, force_demo, status, update_module)
-2024-07-30 12:26:27   File "/usr/lib/python3/dist-packages/odoo/modules/loading.py", line 502, in load_modules
-2024-07-30 12:26:27     registry.setup_models(cr)
-2024-07-30 12:26:27   File "<decorator-gen-19>", line 2, in setup_models
-2024-07-30 12:26:27   File "/usr/lib/python3/dist-packages/odoo/tools/func.py", line 87, in locked
-2024-07-30 12:26:27     return func(inst, *args, **kwargs)
-2024-07-30 12:26:27   File "/usr/lib/python3/dist-packages/odoo/modules/registry.py", line 323, in setup_models
-2024-07-30 12:26:27     model._setup_fields()
-2024-07-30 12:26:27   File "/usr/lib/python3/dist-packages/odoo/models.py", line 3378, in _setup_fields
-2024-07-30 12:26:27     field.setup(self)
-2024-07-30 12:26:27   File "/usr/lib/python3/dist-packages/odoo/fields.py", line 533, in setup
-2024-07-30 12:26:27     self.setup_nonrelated(model)
-2024-07-30 12:26:27   File "/usr/lib/python3/dist-packages/odoo/fields.py", line 4413, in setup_nonrelated
-2024-07-30 12:26:27     invf = comodel._fields[self.inverse_name]
-2024-07-30 12:26:27 KeyError: 'property_id'
-2024-07-30 12:26:27 2024-07-30 11:26:27,370 1 ERROR odoo odoo.http: Exception during request handling. 
-2024-07-30 12:26:27 Traceback (most recent call last):
-2024-07-30 12:26:27   File "/usr/lib/python3/dist-packages/odoo/modules/registry.py", line 87, in __new__
-2024-07-30 12:26:27     return cls.registries[db_name]
-2024-07-30 12:26:27   File "<decorator-gen-5>", line 2, in __getitem__
-2024-07-30 12:26:27   File "/usr/lib/python3/dist-packages/odoo/tools/func.py", line 87, in locked
-2024-07-30 12:26:27     return func(inst, *args, **kwargs)
-2024-07-30 12:26:27   File "/usr/lib/python3/dist-packages/odoo/tools/lru.py", line 34, in __getitem__
-2024-07-30 12:26:27     a = self.d[obj]
-2024-07-30 12:26:27 KeyError: 'odoo'
-2024-07-30 12:26:27 
-2024-07-30 12:26:27 During handling of the above exception, another exception occurred:
-2024-07-30 12:26:27 
-2024-07-30 12:26:27 Traceback (most recent call last):
-2024-07-30 12:26:27   File "/usr/lib/python3/dist-packages/odoo/http.py", line 2189, in __call__
-2024-07-30 12:26:27     response = request._serve_db()
-2024-07-30 12:26:27   File "/usr/lib/python3/dist-packages/odoo/http.py", line 1743, in _serve_db
-2024-07-30 12:26:27     self.registry = Registry(self.db).check_signaling()
-2024-07-30 12:26:27   File "/usr/lib/python3/dist-packages/odoo/modules/registry.py", line 89, in __new__
-2024-07-30 12:26:27     return cls.new(db_name)
-2024-07-30 12:26:27   File "<decorator-gen-16>", line 2, in new
-2024-07-30 12:26:27   File "/usr/lib/python3/dist-packages/odoo/tools/func.py", line 87, in locked
-2024-07-30 12:26:27     return func(inst, *args, **kwargs)
-2024-07-30 12:26:27   File "/usr/lib/python3/dist-packages/odoo/modules/registry.py", line 113, in new
-2024-07-30 12:26:27     odoo.modules.load_modules(registry, force_demo, status, update_module)
-2024-07-30 12:26:27   File "/usr/lib/python3/dist-packages/odoo/modules/loading.py", line 502, in load_modules
-2024-07-30 12:26:27     registry.setup_models(cr)
-2024-07-30 12:26:27   File "<decorator-gen-19>", line 2, in setup_models
-2024-07-30 12:26:27   File "/usr/lib/python3/dist-packages/odoo/tools/func.py", line 87, in locked
-2024-07-30 12:26:27     return func(inst, *args, **kwargs)
-2024-07-30 12:26:27   File "/usr/lib/python3/dist-packages/odoo/modules/registry.py", line 323, in setup_models
-2024-07-30 12:26:27     model._setup_fields()
-2024-07-30 12:26:27   File "/usr/lib/python3/dist-packages/odoo/models.py", line 3378, in _setup_fields
-2024-07-30 12:26:27     field.setup(self)
-2024-07-30 12:26:27   File "/usr/lib/python3/dist-packages/odoo/fields.py", line 533, in setup
-2024-07-30 12:26:27     self.setup_nonrelated(model)
-2024-07-30 12:26:27   File "/usr/lib/python3/dist-packages/odoo/fields.py", line 4413, in setup_nonrelated
-2024-07-30 12:26:27     invf = comodel._fields[self.inverse_name]
-2024-07-30 12:26:27 KeyError: 'property_id'
-2024-07-30 12:26:27 2024-07-30 11:26:27,376 1 INFO odoo werkzeug: 172.18.0.1 - - [30/Jul/2024 11:26:27] "POST /web/webclient/version_info HTTP/1.1" 500 - 14 0.013 1.076
+2024-07-31 15:42:46 2024-07-31 14:42:46,680 1 INFO odoo odoo.modules.loading: loading 1 modules...
+2024-07-31 15:42:46 2024-07-31 14:42:46,697 1 INFO odoo odoo.modules.loading: 1 modules loaded in 0.02s, 0 queries (+0 extra)
+2024-07-31 15:42:46 2024-07-31 14:42:46,746 1 INFO odoo odoo.modules.loading: loading 12 modules...
+2024-07-31 15:42:47 2024-07-31 14:42:47,180 1 INFO odoo odoo.modules.loading: 12 modules loaded in 0.43s, 0 queries (+0 extra)
+2024-07-31 15:42:47 2024-07-31 14:42:47,229 1 WARNING odoo odoo.modules.loading: Transient module states were reset
+2024-07-31 15:42:47 2024-07-31 14:42:47,230 1 ERROR odoo odoo.modules.registry: Failed to load registry
+2024-07-31 15:42:47 Traceback (most recent call last):
+2024-07-31 15:42:47   File "/usr/lib/python3/dist-packages/odoo/modules/registry.py", line 87, in __new__
+2024-07-31 15:42:47     return cls.registries[db_name]
+2024-07-31 15:42:47   File "<decorator-gen-5>", line 2, in __getitem__
+2024-07-31 15:42:47   File "/usr/lib/python3/dist-packages/odoo/tools/func.py", line 87, in locked
+2024-07-31 15:42:47     return func(inst, *args, **kwargs)
+2024-07-31 15:42:47   File "/usr/lib/python3/dist-packages/odoo/tools/lru.py", line 34, in __getitem__
+2024-07-31 15:42:47     a = self.d[obj]
+2024-07-31 15:42:47 KeyError: 'odoo'
+2024-07-31 15:42:47
+2024-07-31 15:42:47 During handling of the above exception, another exception occurred:
+2024-07-31 15:42:47
+2024-07-31 15:42:47 Traceback (most recent call last):
+2024-07-31 15:42:47   File "/usr/lib/python3/dist-packages/odoo/modules/registry.py", line 113, in new
+2024-07-31 15:42:47     odoo.modules.load_modules(registry, force_demo, status, update_module)
+2024-07-31 15:42:47   File "/usr/lib/python3/dist-packages/odoo/modules/loading.py", line 502, in load_modules
+2024-07-31 15:42:47     registry.setup_models(cr)
+2024-07-31 15:42:47   File "<decorator-gen-19>", line 2, in setup_models
+2024-07-31 15:42:47   File "/usr/lib/python3/dist-packages/odoo/tools/func.py", line 87, in locked
+2024-07-31 15:42:47     return func(inst, *args, **kwargs)
+2024-07-31 15:42:47   File "/usr/lib/python3/dist-packages/odoo/modules/registry.py", line 323, in setup_models
+2024-07-31 15:42:47     model._setup_fields()
+2024-07-31 15:42:47   File "/usr/lib/python3/dist-packages/odoo/models.py", line 3378, in _setup_fields
+2024-07-31 15:42:47     field.setup(self)
+2024-07-31 15:42:47   File "/usr/lib/python3/dist-packages/odoo/fields.py", line 531, in setup
+2024-07-31 15:42:47     self.setup_related(model)
+2024-07-31 15:42:47   File "/usr/lib/python3/dist-packages/odoo/fields.py", line 617, in setup_related
+2024-07-31 15:42:47     raise TypeError("Type of related field %s is inconsistent with %s" % (self, field))
+2024-07-31 15:42:47 TypeError: Type of related field estate.property.offer.property_type_id is inconsistent with estate.property.property_type_id
+2024-07-31 15:42:47 2024-07-31 14:42:47,236 1 ERROR odoo odoo.http: Exception during request handling.
+2024-07-31 15:42:47 Traceback (most recent call last):
+2024-07-31 15:42:47   File "/usr/lib/python3/dist-packages/odoo/modules/registry.py", line 87, in __new__
+2024-07-31 15:42:47     return cls.registries[db_name]
+2024-07-31 15:42:47   File "<decorator-gen-5>", line 2, in __getitem__
+2024-07-31 15:42:47   File "/usr/lib/python3/dist-packages/odoo/tools/func.py", line 87, in locked
+2024-07-31 15:42:47     return func(inst, *args, **kwargs)
+2024-07-31 15:42:47   File "/usr/lib/python3/dist-packages/odoo/tools/lru.py", line 34, in __getitem__
+2024-07-31 15:42:47     a = self.d[obj]
+2024-07-31 15:42:47 KeyError: 'odoo'
+2024-07-31 15:42:47
+2024-07-31 15:42:47 During handling of the above exception, another exception occurred:
+2024-07-31 15:42:47
+2024-07-31 15:42:47 Traceback (most recent call last):
+2024-07-31 15:42:47   File "/usr/lib/python3/dist-packages/odoo/http.py", line 2189, in __call__
+2024-07-31 15:42:47     response = request._serve_db()
+2024-07-31 15:42:47   File "/usr/lib/python3/dist-packages/odoo/http.py", line 1743, in _serve_db
+2024-07-31 15:42:47     self.registry = Registry(self.db).check_signaling()
+2024-07-31 15:42:47   File "/usr/lib/python3/dist-packages/odoo/modules/registry.py", line 89, in __new__
+2024-07-31 15:42:47     return cls.new(db_name)
+2024-07-31 15:42:47   File "<decorator-gen-16>", line 2, in new
+2024-07-31 15:42:47   File "/usr/lib/python3/dist-packages/odoo/tools/func.py", line 87, in locked
+2024-07-31 15:42:47     return func(inst, *args, **kwargs)
+2024-07-31 15:42:47   File "/usr/lib/python3/dist-packages/odoo/modules/registry.py", line 113, in new
+2024-07-31 15:42:47     odoo.modules.load_modules(registry, force_demo, status, update_module)
+2024-07-31 15:42:47   File "/usr/lib/python3/dist-packages/odoo/modules/loading.py", line 502, in load_modules
+2024-07-31 15:42:47     registry.setup_models(cr)
+2024-07-31 15:42:47   File "<decorator-gen-19>", line 2, in setup_models
+2024-07-31 15:42:47   File "/usr/lib/python3/dist-packages/odoo/tools/func.py", line 87, in locked
+2024-07-31 15:42:47     return func(inst, *args, **kwargs)
+2024-07-31 15:42:47   File "/usr/lib/python3/dist-packages/odoo/modules/registry.py", line 323, in setup_models
+2024-07-31 15:42:47     model._setup_fields()
+2024-07-31 15:42:47   File "/usr/lib/python3/dist-packages/odoo/models.py", line 3378, in _setup_fields
+2024-07-31 15:42:47     field.setup(self)
+2024-07-31 15:42:47   File "/usr/lib/python3/dist-packages/odoo/fields.py", line 531, in setup
+2024-07-31 15:42:47     self.setup_related(model)
+2024-07-31 15:42:47   File "/usr/lib/python3/dist-packages/odoo/fields.py", line 617, in setup_related
+2024-07-31 15:42:47     raise TypeError("Type of related field %s is inconsistent with %s" % (self, field))
+2024-07-31 15:42:47 TypeError: Type of related field estate.property.offer.property_type_id is inconsistent with estate.property.property_type_id
+2024-07-31 15:42:47 2024-07-31 14:42:47,241 1 INFO odoo werkzeug: 172.18.0.1 - - [31/Jul/2024 14:42:47] "GET / HTTP/1.1" 500 - 14 0.018 0.579
+2024-07-31 15:42:48 2024-07-31 14:42:48,031 1 INFO odoo odoo.modules.loading: loading 1 modules...
+2024-07-31 15:42:48 2024-07-31 14:42:48,129 1 INFO odoo odoo.modules.loading: 1 modules loaded in 0.10s, 0 queries (+0 extra)
+2024-07-31 15:42:48 2024-07-31 14:42:48,146 1 INFO odoo odoo.modules.loading: loading 12 modules...
+2024-07-31 15:42:48 2024-07-31 14:42:48,190 1 INFO odoo odoo.modules.loading: 12 modules loaded in 0.04s, 0 queries (+0 extra)
+2024-07-31 15:42:48 2024-07-31 14:42:48,257 1 WARNING odoo odoo.modules.loading: Transient module states were reset
+2024-07-31 15:42:48 2024-07-31 14:42:48,258 1 ERROR odoo odoo.modules.registry: Failed to load registry
+2024-07-31 15:42:48 Traceback (most recent call last):
+2024-07-31 15:42:48   File "/usr/lib/python3/dist-packages/odoo/modules/registry.py", line 87, in __new__
+2024-07-31 15:42:48     return cls.registries[db_name]
+2024-07-31 15:42:48   File "<decorator-gen-5>", line 2, in __getitem__
+2024-07-31 15:42:48   File "/usr/lib/python3/dist-packages/odoo/tools/func.py", line 87, in locked
+2024-07-31 15:42:48     return func(inst, *args, **kwargs)
+2024-07-31 15:42:48   File "/usr/lib/python3/dist-packages/odoo/tools/lru.py", line 34, in __getitem__
+2024-07-31 15:42:48     a = self.d[obj]
+2024-07-31 15:42:48 KeyError: 'odoo'
+2024-07-31 15:42:48
+2024-07-31 15:42:48 During handling of the above exception, another exception occurred:
+2024-07-31 15:42:48
+2024-07-31 15:42:48 Traceback (most recent call last):
+2024-07-31 15:42:48   File "/usr/lib/python3/dist-packages/odoo/modules/registry.py", line 113, in new
+2024-07-31 15:42:48     odoo.modules.load_modules(registry, force_demo, status, update_module)
+2024-07-31 15:42:48   File "/usr/lib/python3/dist-packages/odoo/modules/loading.py", line 502, in load_modules
+2024-07-31 15:42:48     registry.setup_models(cr)
+2024-07-31 15:42:48   File "<decorator-gen-19>", line 2, in setup_models
+2024-07-31 15:42:48   File "/usr/lib/python3/dist-packages/odoo/tools/func.py", line 87, in locked
+2024-07-31 15:42:48     return func(inst, *args, **kwargs)
+2024-07-31 15:42:48   File "/usr/lib/python3/dist-packages/odoo/modules/registry.py", line 323, in setup_models
+2024-07-31 15:42:48     model._setup_fields()
+2024-07-31 15:42:48   File "/usr/lib/python3/dist-packages/odoo/models.py", line 3378, in _setup_fields
+2024-07-31 15:42:48     field.setup(self)
+2024-07-31 15:42:48   File "/usr/lib/python3/dist-packages/odoo/fields.py", line 531, in setup
+2024-07-31 15:42:48     self.setup_related(model)
+2024-07-31 15:42:48   File "/usr/lib/python3/dist-packages/odoo/fields.py", line 617, in setup_related
+2024-07-31 15:42:48     raise TypeError("Type of related field %s is inconsistent with %s" % (self, field))
+2024-07-31 15:42:48 TypeError: Type of related field estate.property.offer.property_type_id is inconsistent with estate.property.property_type_id
+2024-07-31 15:42:48 2024-07-31 14:42:48,259 1 ERROR odoo odoo.http: Exception during request handling.
+2024-07-31 15:42:48 Traceback (most recent call last):
+2024-07-31 15:42:48   File "/usr/lib/python3/dist-packages/odoo/modules/registry.py", line 87, in __new__
+2024-07-31 15:42:48     return cls.registries[db_name]
+2024-07-31 15:42:48   File "<decorator-gen-5>", line 2, in __getitem__
+2024-07-31 15:42:48   File "/usr/lib/python3/dist-packages/odoo/tools/func.py", line 87, in locked
+2024-07-31 15:42:48     return func(inst, *args, **kwargs)
+2024-07-31 15:42:48   File "/usr/lib/python3/dist-packages/odoo/tools/lru.py", line 34, in __getitem__
+2024-07-31 15:42:48     a = self.d[obj]
+2024-07-31 15:42:48 KeyError: 'odoo'
+2024-07-31 15:42:48
+2024-07-31 15:42:48 During handling of the above exception, another exception occurred:
+2024-07-31 15:42:48
+2024-07-31 15:42:48 Traceback (most recent call last):
+2024-07-31 15:42:48   File "/usr/lib/python3/dist-packages/odoo/http.py", line 2189, in __call__
+2024-07-31 15:42:48     response = request._serve_db()
+2024-07-31 15:42:48   File "/usr/lib/python3/dist-packages/odoo/http.py", line 1743, in _serve_db
+2024-07-31 15:42:48     self.registry = Registry(self.db).check_signaling()
+2024-07-31 15:42:48   File "/usr/lib/python3/dist-packages/odoo/modules/registry.py", line 89, in __new__
+2024-07-31 15:42:48     return cls.new(db_name)
+2024-07-31 15:42:48   File "<decorator-gen-16>", line 2, in new
+2024-07-31 15:42:48   File "/usr/lib/python3/dist-packages/odoo/tools/func.py", line 87, in locked
+2024-07-31 15:42:48     return func(inst, *args, **kwargs)
+2024-07-31 15:42:48   File "/usr/lib/python3/dist-packages/odoo/modules/registry.py", line 113, in new
+2024-07-31 15:42:48     odoo.modules.load_modules(registry, force_demo, status, update_module)
+2024-07-31 15:42:48   File "/usr/lib/python3/dist-packages/odoo/modules/loading.py", line 502, in load_modules
+2024-07-31 15:42:48     registry.setup_models(cr)
+2024-07-31 15:42:48   File "<decorator-gen-19>", line 2, in setup_models
+2024-07-31 15:42:48   File "/usr/lib/python3/dist-packages/odoo/tools/func.py", line 87, in locked
+2024-07-31 15:42:48     return func(inst, *args, **kwargs)
+2024-07-31 15:42:48   File "/usr/lib/python3/dist-packages/odoo/modules/registry.py", line 323, in setup_models
+2024-07-31 15:42:48     model._setup_fields()
+2024-07-31 15:42:48   File "/usr/lib/python3/dist-packages/odoo/models.py", line 3378, in _setup_fields
+2024-07-31 15:42:48     field.setup(self)
+2024-07-31 15:42:48   File "/usr/lib/python3/dist-packages/odoo/fields.py", line 531, in setup
+2024-07-31 15:42:48     self.setup_related(model)
+2024-07-31 15:42:48   File "/usr/lib/python3/dist-packages/odoo/fields.py", line 617, in setup_related
+2024-07-31 15:42:48     raise TypeError("Type of related field %s is inconsistent with %s" % (self, field))
+2024-07-31 15:42:48 TypeError: Type of related field estate.property.offer.property_type_id is inconsistent with estate.property.property_type_id
+2024-07-31 15:42:48 2024-07-31 14:42:48,260 1 INFO odoo werkzeug: 172.18.0.1 - - [31/Jul/2024 14:42:48] "GET /favicon.ico HTTP/1.1" 500 - 14 0.015 0.234

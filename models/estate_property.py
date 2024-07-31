@@ -7,6 +7,7 @@ from odoo.tools.float_utils import float_compare, float_is_zero
 class EstateProperty(models.Model):
     _name = 'estate.property'
     _description = 'Estate Property'
+    _order = "id desc"
 
     name = fields.Char(string='Name', required=True)
     description = fields.Text(string='Description')
@@ -55,7 +56,7 @@ class EstateProperty(models.Model):
 
     # one to many
     offer_ids = fields.One2many("estate.property.offer", "property_id", string="Offers")
-
+    offer_count = fields.Integer(string='Offer Count', compute='_compute_offer_count')
     # --------- Computed fields ---------#
 
     # Total area
@@ -77,6 +78,14 @@ class EstateProperty(models.Model):
             else:
                 _property.best_price = 0.0
 
+    # auto updating the property state and the number of offers.
+    @api.depends("offer_count", "state")
+    def _compute_offer_count(self):
+        for _property in self:
+            _property.offer_count = len(_property.offer_ids.mapped('price'))
+            if _property.offer_count > 0 and _property.state == 'new':
+                _property.state = 'offer_received'
+
     # --------- On changes handlers ---------#
     @api.onchange("garden")
     def _onchange_garden(self):
@@ -86,6 +95,11 @@ class EstateProperty(models.Model):
         else:
             self.garden_orientation = ""
             self.garden_area = 0.0
+
+    @api.onchange("offer_ids")
+    def _onchange_offer_ids(self):
+        self.offer_count = len(self.offer_ids)
+
 
     # --------- Action Buttons ---------#
 

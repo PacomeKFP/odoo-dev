@@ -5,6 +5,7 @@
         <record id="property_type_action" model="ir.actions.act_window">
             <field name="name">Property Types</field>
             <field name="res_model">estate.property.type</field>
+            <field name="context">{'active_test': False}</field>
             <field name="view_mode">tree,form</field>
         </record>
 
@@ -15,6 +16,9 @@
             <field name="arch" type="xml">
                 <tree>
                     <field name="name"/>
+                    <field name="offer_ids"/>
+                    <field name="offer_count"/>
+                    <field name="sequence" widget="handle"/>
                 </tree>
             </field>
         </record>
@@ -25,10 +29,29 @@
             <field name="model">estate.property.type</field>
             <field name="arch" type="xml">
                 <form string="Estate Property Type">
+
                     <sheet>
-                        <h1>
-                            <field name="name" placeholder="House"/>
-                        </h1>
+                        <div class="row justify-content-between">
+                            <h1 class="w-50">
+                                <field name="name" placeholder="House"/>
+                            </h1>
+                            <button class="oe_stat_button w-25" icon="fa-money" name="%(property_offer_action)d" type="action">
+                                <field string=" Offers" name="offer_count" widget="statinfo"/>
+                            </button>
+                        </div>
+
+
+                        <notebook>
+                            <page string="Properties">
+                                <field name="property_ids">
+                                    <tree>
+                                        <field name="name" string="Title"/>
+                                        <field name="expected_price" string="Expected Price"/>
+                                        <field name="state" string="Status"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
                     </sheet>
                 </form>
             </field>
