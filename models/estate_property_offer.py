@@ -2,6 +2,8 @@ from datetime import timedelta
 from odoo import models, fields, api
 from odoo.exceptions import UserError
 
+from models.estate_property import EstateProperty
+
 
 class EstatePropertyOffer(models.Model):
     _name = 'estate.property.offer'
@@ -68,3 +70,34 @@ class EstatePropertyOffer(models.Model):
         ("price", "check(price>0)", "Offer Price must me positive"),
         ("validity", "check(validity>0)", "Validity must me positive"),
     ]
+
+    # --------- On Create ---------#
+    @api.model
+    def create(self, vals_list):
+        _property = self.env['estate.property'].browse(vals_list["property_id"])
+
+        if not _property:
+            raise UserError("The Specified Property does not exists")
+
+        # verifier si le montant est suffisant
+        if _property.best_price > vals_list['price']:
+            raise UserError(
+                f"The amount of the Offer must be at greater than actual best offer which is {_property.best_price}")
+
+        # verifer si le truc n'est pas encore vendu
+        if _property.state == "offer_accepted":
+            raise UserError("An Offer has already been accepted")
+
+        if _property.state == "sold":
+            raise UserError("The Property has been already sold")
+
+        if _property.state == "canceled":
+            raise UserError("The Property has been canceled")
+
+        ## Si tout est en regle,
+        ### on modifie l'etat de la propriete si elle est nouvelle
+        if _property.state == "new":
+            _property.state = "offer_received"
+
+        ### on cloture
+        return super().create(vals_list)

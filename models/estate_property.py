@@ -100,7 +100,6 @@ class EstateProperty(models.Model):
     def _onchange_offer_ids(self):
         self.offer_count = len(self.offer_ids)
 
-
     # --------- Action Buttons ---------#
 
     def action_cancel(self):
@@ -127,3 +126,10 @@ class EstateProperty(models.Model):
         for _property in self:
             if float_compare(_property.expected_price * 0.9, _property.selling_price, 3) == 1:
                 raise UserError("Selling price must be at least 90% of the expected price")
+
+    # --------- On Delete handlers ---------#
+    @api.ondelete(at_uninstall=False)
+    def _ondelete_(self):
+        for _property in self:
+            if _property.state not in ["new", "canceled"]:
+                raise UserError("You cannot delete a property which is neither new nor canceled")
