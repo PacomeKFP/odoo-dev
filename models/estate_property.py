@@ -112,6 +112,10 @@ class EstateProperty(models.Model):
             if _property.state == "canceled":
                 raise UserError("Cancelled Properties cannot be sold")
             _property.state = "sold"
+
+            for offer in _property.offer_ids:
+                if offer.status == "accepted":
+                    _property.buyer_id = offer.partner_id.id
         return True
 
     # --------- Constraints ---------#
