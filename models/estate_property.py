@@ -113,9 +113,17 @@ class EstateProperty(models.Model):
                 raise UserError("Cancelled Properties cannot be sold")
             _property.state = "sold"
 
+            accepted_offer = None
             for offer in _property.offer_ids:
                 if offer.status == "accepted":
-                    _property.buyer_id = offer.partner_id.id
+                    accepted_offer = offer
+
+            if accepted_offer is None:
+                raise UserError(
+                    "No offer has been accepted for this property, \n <b> You have to accept an offer before selling "
+                    "the property</b>")
+
+            _property.buyer_id = accepted_offer.partner_id.id
         return True
 
     # --------- Constraints ---------#
