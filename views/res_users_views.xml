@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Inherit the res.users form view -->
+        <record id="res_users_form_inherit" model="ir.ui.view">
+            <field name="name">real.estate.res_users.form</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="Real Estate Properties">
+                        <!-- Include context to show inactive records -->
+                        <field name="property_ids" context="{'search_default_active': False, 'active_test': False}">
+                            <tree>
+                                <field name="name"/>
+                                <field name="postcode"/>
+                                <field name="expected_price"/>
+                                <field name="selling_price"/>
+                                <field name="best_price"/>
+                                <field name="state"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

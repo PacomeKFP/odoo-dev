@@ -5,7 +5,7 @@
         <record id="estate_property_action" model="ir.actions.act_window">
             <field name="name">Properties</field>
             <field name="res_model">estate.property</field>
-            <field name="context">{'active_test': False, 'search_default_available':True}</field>
+            <field name="context">{ 'search_default_available':True}</field>
             <field name="view_mode">tree,form</field>
         </record>
 
@@ -23,7 +23,7 @@
                     <field name="postcode" readonly="1"/>
                     <field name="bedrooms" readonly="1"/>
                     <field name="living_area" readonly="1"/>
-                    <field name="active" readonly="1"/>
+<!--                    <field name="active" readonly="1"/>-->
                     <field name="state" readonly="1"/>
                     <field name="expected_price" readonly="1"/>
                     <field name="selling_price" readonly="1"/>
@@ -53,7 +53,7 @@
                                 invisible="state == 'canceled'"/>
 
                         <field name="state" widget="statusbar"
-                               statusbar_visible="new,offer_received,offer_accepted,sold,canceled"/>
+                               statusbar_visible="new,offer_received,offer_accepted,sold"/>
                     </header>
                     <sheet>
                         <h1>

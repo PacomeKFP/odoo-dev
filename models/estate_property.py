@@ -14,7 +14,7 @@ class EstateProperty(models.Model):
     postcode = fields.Char(string='Postcode')
     date_availability = fields.Date(string='Date Availability', copy=False,
                                     default=lambda self: fields.Date.today() + timedelta(days=90))
-    active = fields.Boolean(string='Active')
+    # active = fields.Boolean(string='Active', default=True)
     state = fields.Selection(
         string="State",
         selection=[
