@@ -34,7 +34,6 @@
                                     <p>
                                         <strong>Expected Price:</strong>
                                         <field name="expected_price"/>
-
                                     </p>
                                     <t t-if="record.state == 'offer_received'">
                                         <p>
