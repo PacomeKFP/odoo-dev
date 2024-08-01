@@ -6,7 +6,65 @@
             <field name="name">Properties</field>
             <field name="res_model">estate.property</field>
             <field name="context">{ 'search_default_available':True}</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">tree,kanban,form</field>
+        </record>
+
+
+        <!-- Kanban View for Estate Property -->
+        <record id="view_estate_property_kanban" model="ir.ui.view">
+            <field name="name">estate.property.kanban</field>
+            <field name="model">estate.property</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_example" default_group_by="property_type_id">
+                    <field name="property_type_id"/>
+                    <field name="state"/>
+                    <field name="tags_id"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_color_#{kanban_getcolor(record.property_type_id.raw_value)}"
+                                 class="py-2">
+                                <div class="o_kanban_record_top">
+                                    <div class="o_kanban_title">
+                                        <h3>
+                                            <field name="name"/>
+                                        </h3>
+                                    </div>
+                                </div>
+                                <div class="o_kanban_details">
+                                    <p>
+                                        <strong>Expected Price:</strong>
+                                        <field name="expected_price"/>
+
+                                    </p>
+                                    <t t-if="record.state == 'offer_received'">
+                                        <p>
+
+                                            <strong>Best Offer:</strong>
+                                            <field name="best_price"/>
+
+                                        </p>
+                                    </t>
+                                    <t t-if="record.state == 'offer_accepted'">
+                                        <p>
+                                            <strong>Selling Price:</strong>
+                                            <field name="selling_price"/>
+
+                                        </p>
+                                    </t>
+                                    <div>
+<!--                                        <t t-foreach="record.tags_id" t-as="tag">-->
+<!--                                            <span t-esc="tag.name" class="o_tag badge"/>-->
+<!--                                        </t>-->
+
+                                        <field name="tags_id" widget="many2many_tags"
+                           options="{'create': [], 'color_field':'color', 'can_create':'1'}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
         </record>
 
         <!-- Tree View for Estate Property -->
@@ -23,7 +81,7 @@
                     <field name="postcode" readonly="1"/>
                     <field name="bedrooms" readonly="1"/>
                     <field name="living_area" readonly="1"/>
-<!--                    <field name="active" readonly="1"/>-->
+                    <!--                    <field name="active" readonly="1"/>-->
                     <field name="state" readonly="1"/>
                     <field name="expected_price" readonly="1"/>
                     <field name="selling_price" readonly="1"/>
@@ -121,7 +179,7 @@
                                                 class="btn btn-outline-warning pb-1 pr-1" string="Refuse"
                                                 states="draft,open" type="object"
                                                 icon="fa-times"/>
-                                                                                <field name="status" invisible="1"/>
+                                        <field name="status" invisible="1"/>
 
                                     </tree>
                                 </field>

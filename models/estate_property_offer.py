@@ -51,6 +51,7 @@ class EstatePropertyOffer(models.Model):
                 offer.status = 'refused'
 
             _offer.status = 'accepted'
+            _offer.property_id.state = "offer_accepted"
             _offer.property_id.buyer_id = _offer.partner_id.id
             _offer.property_id.selling_price = _offer.price
 
