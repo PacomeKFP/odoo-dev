@@ -6,20 +6,17 @@ class Account(models.Model):
     _description = 'Account'
 
     name = fields.Char(string="Libelé", default="Principal")
-    number = fields.Char(string="Numero de compte ", default="0")
+    number = fields.Char(string="Numéro de compte", default="0")
 
-    customer_id = fields.Many2one('res.partner', string="Proprietaire")
+    customer_id = fields.Many2one('res.partner', string="Propriétaire")
 
     transaction_ids = fields.One2many('knance.transaction', 'account_id', string="Transactions")
 
-    balance = fields.Float(string="Solde", compute='_compute_balance')
+    balance = fields.Float(string="Solde", compute='_compute_balance', store=True)
 
-    @api.depends('transaction_ids')
+    @api.depends('transaction_ids.relative_amount')
     def _compute_balance(self):
         for account in self:
-            account.balance = 0
-            for transaction in account.transaction_ids:
-                transaction.balance += account.relative_amount
-
+            account.balance = sum(account.transaction_ids.mapped('relative_amount'))
 
 

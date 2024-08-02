@@ -11,18 +11,15 @@ class Transaction(models.Model):
         default="deposit")
 
     amount = fields.Float(string="Amount")
-    relative_amount = fields.Float(string="Relative amount", compute="_compute_relative_amount")
+    relative_amount = fields.Float(string="Relative amount", compute="_compute_relative_amount", store=True)
 
     account_id = fields.Many2one('knance.account', string="Account")
 
     _sql_constraints = [
-        ("amount", "check(amount>0)", "Le montant de la transaction doit  strictement positif"),
+        ("positive_amount", "CHECK(amount > 0)", "Le montant de la transaction doit être strictement positif"),
     ]
 
-    @api.depends("amount")
+    @api.depends("amount", "transaction_type")
     def _compute_relative_amount(self):
         for transaction in self:
-            if transaction.transaction_type == "deposit":
-                transaction.relative_amount = transaction.amount
-            else:
-                transaction.relative_amount = -1 * transaction.amount
+            transaction.relative_amount = transaction.amount if transaction.transaction_type == "deposit" else -transaction.amount
