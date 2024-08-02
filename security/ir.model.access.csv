@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_res_partner,knance.res_partner,model_res_partner,base.group_user,1,1,1,1
+access_knance_account,knance.account,model_knance_account,base.group_user,1,1,1,1
+access_knance_transaction,knance.transaction,model_knance_transaction,base.group_user,1,1,1,1

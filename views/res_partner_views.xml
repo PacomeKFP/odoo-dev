@@ -1,0 +1,84 @@
+<odoo>
+    <data>
+        <!-- explicit list view definition -->
+
+        <record model="ir.ui.view" id="knance_res_partner_action_view_tree">
+            <field name="name">Clients</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="street"/>
+                    <field name="phone"/>
+                    <field name="email"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="knance_res_partner_action_view_form">
+            <field name="name">Clients</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div>
+                            <h1 class="w-75">
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <field name="street"/>
+                        </group>
+                        <group>
+                            <field name="phone"/>
+                            <field name="email"/>
+                        </group>
+
+                        <notebook>
+
+                            <page string="Compte Principal">
+                                <field name="account_ids">
+                                    <header>
+                                        <h3>
+                                            <field name="name"/>
+                                        </h3>
+                                    </header>
+                                    <field name="transaction_ids">
+                                        <tree string="Transaction"
+                                              decoration-success="transaction_type == 'deposit'"
+                                              decoration-warning="transaction_type == 'withdrawal'"
+                                        >
+                                            <field name="amount"/>
+                                            <field name="create_date"/>
+                                        </tree>
+                                    </field>
+
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- actions opening views on models -->
+
+        <record model="ir.actions.act_window" id="knance_res_partner_action">
+            <field name="name">Knance window</field>
+            <field name="res_model">knance.knance</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <!-- Top menu item -->
+
+        <menuitem id="knance_menu_root" name="Knance">
+            <menuitem id="knance_res_partner_menu" name="General" parent="knance.menu_root">
+                <menuitem id="knance_res_partner_menu_tree" name="Clients" action="knance.knance_res_partner_action"/>
+            </menuitem>
+        </menuitem>
+
+
+    </data>
+</odoo>
