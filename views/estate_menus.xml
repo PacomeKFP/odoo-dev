@@ -3,7 +3,7 @@
     <data>
 
         <!-- Root Menu for Real Estate -->
-        <menuitem id="real_estate_menu_root" name="Real Estate Old"/>
+        <menuitem id="real_estate_menu_root" name="Real Estate"/>
 
         <!-- Advertisements Menu -->
         <menuitem id="advertisements_menu" name="Advertisements" parent="real_estate_menu_root"/>
