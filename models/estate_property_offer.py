@@ -60,8 +60,6 @@ class EstatePropertyOffer(models.Model):
     def action_refuse(self):
         for _offer in self:
             _offer.status = 'refused'
-            _offer.property_id.buyer_id = ""
-            _offer.property_id.selling_price = 0
 
         return True
 
