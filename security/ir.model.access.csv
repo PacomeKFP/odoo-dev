@@ -1,3 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_knance_account,knance.account.user,model_knance_account,base.group_user,1,1,1,1
+access_knance_collector,knance.collector.user,model_knance_collector,base.group_user,1,1,1,1
+access_knance_customer,knance.customer.user,model_knance_customer,base.group_user,1,1,1,1
 access_knance_transaction,knance.transaction.user,model_knance_transaction,base.group_user,1,1,1,1

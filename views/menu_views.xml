@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-<!-- Menu Items -->
-        <menuitem id="knance_menu_root" name="Knance">
-            <menuitem id="knance_customers_menu" name="Customers" action="knance_res_partner_action"/>
-        </menuitem>
+        <!-- Menu Items -->
+        <menuitem id="knance_menu_root" name="Knance"/>
+        <menuitem
+                id="knance_customers_menu"
+                name="Clients"
+                parent="knance_menu_root"
+                action="knance_res_partner_action"/>
+
+        <menuitem
+                id="knance_collectors_menu"
+                name="Collecteurs"
+                parent="knance_menu_root"
+                action="knance_collector_action"/>
 
     </data>
 </odoo>

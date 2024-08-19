@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="knance_customer_account_number_sequence" model="ir.sequence">
+            <field name="name">Customer Account Number Sequence</field>
+            <field name="code">knance.customer.account_number.seq</field>
+            <field name="prefix">SN</field>
+            <field name="padding">4</field>
+        </record>
+
+        <record id="knance_transaction_sequence" model="ir.sequence">
+            <field name="name">Transactions Sequence</field>
+            <field name="code">knance.transaction.seq</field>
+            <field name="prefix">REF</field>
+            <field name="padding">7</field>
+        </record>
+
+    </data>
+</odoo>

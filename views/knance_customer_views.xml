@@ -1,24 +1,18 @@
 <odoo>
     <data>
-
-        <!-- Menu Items -->
-        <menuitem id="knance_menu_root" name="Knance">
-            <menuitem id="knance_customers_menu" name="Customers" action="knance_res_partner_action"/>
-        </menuitem>
-
-
         <!-- Partner Tree View -->
         <record model="ir.ui.view" id="knance_res_partner_view_tree">
             <field name="name">knance.customer.tree</field>
             <field name="priority" eval="0"/>
-            <field name="model">res.partner</field>
+            <field name="model">knance.customer</field>
             <field name="arch" type="xml">
                 <tree>
+                    <field name="account_number"/>
                     <field name="name"/>
-                    <field name="street"/>
                     <field name="phone"/>
+                    <field name="account_balance"/>
+                    <field name="street"/>
                     <field name="email"/>
-                    <field name="total_balance"/>
                 </tree>
             </field>
         </record>
@@ -26,43 +20,75 @@
         <!-- Partner Form View -->
         <record model="ir.ui.view" id="knance_res_partner_view_form">
             <field name="name">knance.customer.form</field>
-            <field name="model">res.partner</field>
-            <field name="priority" eval="0"/>
+            <field name="model">knance.customer</field>
             <field name="arch" type="xml">
                 <form>
                     <sheet>
-                        <div class="oe_title">
-                            <h1>
-                                <field name="name" placeholder="Name"/>
+                        <div class="row justify-content-between ">
+                            <div class="oe_button_box" name="button_box"/>
+                            <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="1"/>
+                            <field name="avatar_128" invisible="1"/>
+                            <h1 class="oe_title w-50">
+                                <field name="name" placeholder="Nom ..."/>
                             </h1>
+                            <field name="image_1920" widget="image" class="oe_avatar w-25"
+                                   options="{&quot;preview_image&quot;: &quot;avatar_128&quot;}"/>
+
                         </div>
+
                         <group>
                             <group>
-                                <field name="street"/>
+                                <field name="email"/>
                                 <field name="phone"/>
                             </group>
                             <group>
-                                <field name="email"/>
-                                <field name="total_balance"/>
+                                <field name="street"/>
+                                <field name="account_balance" decoration-bf="1"/>
                             </group>
                         </group>
 
                         <notebook>
-                            <page string="Accounts">
-                                <field name="account_ids">
-                                    <tree>
+                            <page string="Transactions">
+                                <field name="transaction_ids" invisible="id == False">
+                                    <tree
+                                            decoration-success="transaction_type == 'deposit'"
+                                            decoration-danger="transaction_type == 'withdrawal'"
+                                            open_form_view="1">
                                         <field name="name"/>
-                                        <field name="number"/>
-                                        <field name="balance"/>
+                                        <field name="transaction_type"/>
+                                        <field name="amount"/>
+                                        <field name="state" optional="hide"/>
+                                        <field name="customer_id"/>
+                                        <field name="create_date" string="Initiée le"/>
                                     </tree>
                                 </field>
+
+                                <p invisible="not id == False" class="mx-4">
+                                    <br/>
+                                    <br/>
+                                    Aucune transaction pour le moment
+                                </p>
                             </page>
                         </notebook>
+
                     </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" options="{'post_refresh':True}" groups="base.group_user"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
                 </form>
             </field>
         </record>
 
+        <!-- Action -->
+        <record model="ir.actions.act_window" id="knance_res_partner_action">
+            <field name="name">Clients</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">knance.customer</field>
+            <field name="binding_view_types">tree</field>
+            <field name="view_mode">tree,form</field>
+        </record>
 
         <!-- Tree Action view -->
         <record model="ir.actions.act_window.view" id="knance_res_partner_action_view_tree">
@@ -80,14 +106,6 @@
             <field name="view_id" ref="knance_res_partner_view_form"/>
         </record>
 
-        <!-- Action -->
-        <record model="ir.actions.act_window" id="knance_res_partner_action">
-            <field name="name">Clients</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">res.partner</field>
-            <field name="binding_view_types">tree</field>
-            <field name="view_mode">tree,form</field>
-        </record>
 
     </data>
 </odoo>

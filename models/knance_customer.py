@@ -1,32 +1,44 @@
-from odoo import fields, models, api
+from odoo import fields, models, api, _
+from random import randint
 
-class CustomerPartner(models.Model):
-    # _name = "knance.customer"
-    _inherit = 'res.partner'
-    _description = 'The customer'
 
-    account_ids = fields.One2many("knance.account", "customer_id", string="Vos comptes")
+class Customer(models.Model):
+    _name = 'knance.customer'
+    _description = 'le Client'
+    _inherits = {'res.partner': 'partner_id'}
+    _inherit = ['mail.activity.mixin', 'mail.thread']
 
-    total_balance = fields.Float(string="Solde total", compute='_compute_total_balance')
-    street = fields.Char(string='Adresse')
+    # --------- Customer data ---------#
+    # Other information about the customer are inherited from the res.partner model
+    partner_id = fields.Many2one('res.partner', required=True, ondelete='restrict', auto_join=True, index=True,
+                                 string='Related Partner', help='Partner-related data of the customer')
+    name = fields.Char(related='partner_id.name', inherited=True, readonly=False)
+    email = fields.Char(related='partner_id.email', inherited=True, readonly=False)
+    phone = fields.Char(related='partner_id.phone', inherited=True, readonly=False)
+    street = fields.Char(related='partner_id.street', inherited=True, readonly=False, string='Adresse')
+    # --------- Customer Account data ---------#
+    account_name = fields.Char(string="Nom du compte", default="Compte Principal", readonly=True)
+    account_number = fields.Char(string="Numéro de compte", default="Nouveau", readonly=True)
+    account_balance = fields.Float(string="Solde", compute='_compute_balance')
 
-    @api.depends('account_ids.balance')
-    def _compute_total_balance(self):
-        for record in self:
-            record.total_balance = sum(record.account_ids.mapped("balance"))
+    transaction_ids = fields.One2many('knance.transaction', 'customer_id', string="Transactions", required=True)
 
-    @api.model
-    def create(self, vals_list):
-        print("startup")
-        # index = '{:0>6}'.format(self.env["knance.account"].search_count(domain=[]) + 1)
-        index = '{:0>6}'.format(1)
-        print("before")
-        created_customer = super().create(vals_list)
-        print("after")
-        self.env["knance.account"].create({
-            "number": f"AC-{index}",
-            "customer_id": created_customer.id,
-        })
-        print('end')
+    active = fields.Boolean(string="Activé", default=True)
 
-        return created_customer
+    # --------- CRUDs ---------#
+    @api.model_create_multi
+    def create(self, data_list):
+        records = super().create(data_list)
+        for record in records:
+            if record.account_number == _('Nouveau'):
+                record.account_number = self.env['ir.sequence'].next_by_code('knance.customer.account_number.seq') or _(
+                    'Nouveau')
+        return records
+
+        # si tout se passe bien, on enregistre le client avec son compte principal
+
+    # --------- Computations for fields ---------#
+    @api.depends('transaction_ids.relative_amount')
+    def _compute_balance(self):
+        for customer in self:
+            customer.account_balance = sum(customer.transaction_ids.mapped('relative_amount'))

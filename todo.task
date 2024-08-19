@@ -1,28 +1,4 @@
 # To-do list
 
-- [ ] Create models
-    - [x] Natural part
-        - [x] Customer
-        - [x] Account
-        - [x] Transaction
-    - [x] Set relationships between models
-        - [x] Customer - Account
-        - [x] Account - Transaction
-    - [x] Add computed fields
-        - [x] total_balance (customer): sum of customer's account balances
-        - [x] balance (account): algebraic sum of transaction amounts
-    - [x] add access rights
-        - [x] Customer
-        - [x] Account
-        - [x] Transaction
-
-- [x] Create views
-    - [x] Menu and actions
-        - [x] Create menu
-        - [x] Create action for customer
-    - [x] Add views
-        - [x] Create tree view for customer
-        - [ ] Create form view for customer
-            - [x] Customer part
-            - [x] Add notebook and page for main account
-            - [x] Add tree view for transaction list
+- [ ] Rajouter les unités pour la monaie
+- [ ] Mettre en exergue le workflow pour les transactions (ceci viendra apres la synchonisation)

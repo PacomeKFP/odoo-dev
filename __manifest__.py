@@ -19,17 +19,19 @@ Long description of module's purpose
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base'],
+    'depends': ['base', 'hr', 'mail', 'project'],
 
     # always loaded
     'data': [
         'security/ir.model.access.csv',
+
+        'data/sequences.xml',
+
+
+        'views/knance_collector_views.xml',
+        'views/knance_transaction_views.xml',
         'views/knance_customer_views.xml',
-        'views/templates.xml',
-    ],
-    # only loaded in demonstration mode
-    'demo': [
-        'demo/demo.xml',
+        'views/menu_views.xml',
     ],
     "application": True,
 }

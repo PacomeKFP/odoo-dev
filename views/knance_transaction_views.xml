@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Transaction Form View -->
+        <record model="ir.ui.view" id="knance_transaction_view_form">
+            <field name="name">knance.transaction.form</field>
+            <field name="model">knance.transaction</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="transaction_type"/>
+                            <field name="amount"/>
+                        </group>
+                        <group>
+                            <field name="state"/>
+                            <field name="collector_id" readonly="1"/>
+                            <field name="create_date" string="Initiée le"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" options="{'post_refresh':True}" groups="base.group_user"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- Transaction Tree View -->
+        <record model="ir.ui.view" id="knance_transaction_view_tree">
+            <field name="name">knance.transaction.tree</field>
+            <field name="model">knance.transaction</field>
+<!--            <field name="domain">[('customer_id', '=', active_id)]</field>-->
+            <field name="arch" type="xml">
+                <tree
+                      decoration-success="transaction_type == 'deposit'"
+                      decoration-danger="transaction_type == 'withdrawal'">
+                    <field name="name"/>
+                    <field name="transaction_type"/>
+                    <field name="amount"/>
+                    <field name="state"/>
+                    <field name="collector_id"/>
+                    <field name="create_date" string="Initiée le"/>
+                </tree>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>
