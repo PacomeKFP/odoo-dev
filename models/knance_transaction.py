@@ -55,7 +55,7 @@ class Transaction(models.Model):
         for transaction in self:
             # En cas de retrait s'assurer que le montant à retirer inférieur au solde
             if (transaction.transaction_type == "withdrawal"
-                    and transaction.customer_id.account_balance <= transaction.amount):
+                    and transaction.customer_id.account_balance + transaction.amount <= transaction.amount):
                 raise UserError("Retrait impossible - Le montant demandé est supérieur au solde du compte")
 
     # --------- CRUDs ---------#

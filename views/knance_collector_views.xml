@@ -16,8 +16,8 @@
             <field name="arch" type="xml">
                 <tree>
                     <field name="name"/>
-                    <field name="phone"/>
-                    <field name="email"/>
+                    <field name="work_phone"/>
+                    <field name="work_email"/>
                 </tree>
             </field>
         </record>
@@ -33,13 +33,15 @@
                             <field name="name"/>
                         </h1>
                         <group>
-                            <field name="phone"/>
-                            <field name="email"/>
+                            <field name="work_phone"/>
+                            <field name="work_email"/>
                         </group>
-                        <notebook>
+
+                        <notebook invisible="id==False">
                             <page string="Transactions éffectuées">
                                 <field name="transaction_ids">
-                                    <tree decoration-mute="state == 'canceled'"
+                                    <tree create="false" delete="false"
+                                          decoration-mute="state == 'canceled'"
                                           decoration-success="transaction_type == 'deposit'"
                                           decoration-danger="transaction_type == 'withdrawal'"
                                           open_form_view="1">
@@ -55,9 +57,9 @@
                         </notebook>
                     </sheet>
                     <div class="oe_chatter">
-<!--                        <field name="partner_id.message_follower_ids" options="{'post_refresh':True}" groups="base.group_user"/>-->
-<!--                        <field name="partner_id.activity_ids"/>-->
-<!--                        <field name="partner_id.message_ids"/>-->
+                        <!--                        <field name="partner_id.message_follower_ids" options="{'post_refresh':True}" groups="base.group_user"/>-->
+                        <!--                        <field name="partner_id.activity_ids"/>-->
+                        <!--                        <field name="partner_id.message_ids"/>-->
                     </div>
                 </form>
             </field>

@@ -16,6 +16,7 @@
                         <group>
                             <field name="state"/>
                             <field name="collector_id" readonly="1"/>
+                            <field name="customer_id" readonly="1"/>
                             <field name="create_date" string="Initiée le"/>
                         </group>
                     </sheet>

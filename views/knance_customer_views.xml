@@ -47,7 +47,8 @@
                             </group>
                         </group>
 
-                        <notebook>
+
+                        <notebook invisible="id==False">
                             <page string="Transactions">
                                 <field name="transaction_ids" invisible="id == False">
                                     <tree
